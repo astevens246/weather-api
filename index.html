@@ -44,10 +44,10 @@
         function updateWeatherData(weatherData) {
           const tempEl = document.getElementById('temp');
           const descEl = document.getElementById('desc');
-          tempEl.innerHTML = weatherData.main.temp;
-          descEl.innerHTML = weatherData.weather[0].description;
+          tempEl.innerHTML = weatherData.temperature;
+          descEl.innerHTML = weatherData.description;
       }
-        getWeather(apiKey, zip, updateWeatherData);
+        getWeather(apiKey, zip).then(updateWeatherData).catch(console.error);
 
       })           
     </script>
