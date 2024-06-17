@@ -41,7 +41,14 @@
         const zip = zipInput.value
 
         const apiKey = '1c4e590826ba3ca40333880acb9b0ddd'
-        getWeather(apiKey, zip, tempEl, descEl)
+        function updateWeatherData(weatherData) {
+          const tempEl = document.getElementById('temp');
+          const descEl = document.getElementById('desc');
+          tempEl.innerHTML = weatherData.main.temp;
+          descEl.innerHTML = weatherData.weather[0].description;
+      }
+        getWeather(apiKey, zip, updateWeatherData);
+
       })           
     </script>
   </body>

@@ -1,5 +1,5 @@
  // Functions 
- function getWeather(apikey, zip, tempEl, descEl) {
+ function getWeather(apikey, zip, callback) {
     // Replace this with your own API key!
     const apiKey = '1c4e590826ba3ca40333880acb9b0ddd'
     const units = 'imperial'
@@ -7,8 +7,7 @@
     fetch(path)
       .then(res => res.json())
       .then(json => {
-        tempEl.innerHTML = json.main.temp
-        descEl.innerHTML = json.weather[0].description
+        callback(json);
       })
       .catch(err => console.log(err.message))
   }
