@@ -25,7 +25,7 @@
     </div>
 
     <script type="module">
-      import { getWeather } from './weather.js'
+      import { getWeatherByZip, getWeatherByCity, getWeatherByGeo } from './weather.js'
       // ------------------------------------------------------
       // Developer Code
 
@@ -39,15 +39,20 @@
       formEl.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
+        const unit = 'imperial'
 
-        const apiKey = '1c4e590826ba3ca40333880acb9b0ddd'
         function updateWeatherData(weatherData) {
           const tempEl = document.getElementById('temp');
           const descEl = document.getElementById('desc');
           tempEl.innerHTML = weatherData.temperature;
           descEl.innerHTML = weatherData.description;
+          console.log(weatherData)
+
       }
-        getWeather(apiKey, zip).then(updateWeatherData).catch(console.error);
+        getWeatherByZip(zip, unit)
+        .then(updateWeatherData)
+        .catch(console.error);
+
 
       })           
     </script>
