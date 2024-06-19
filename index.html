@@ -25,36 +25,34 @@
     </div>
 
     <script type="module">
-      import { getWeatherByZip, getWeatherByCity, getWeatherByGeo } from './weather.js'
-      // ------------------------------------------------------
-      // Developer Code
-
-      // Get Element refererences
-      const tempEl = document.getElementById('temp')
-      const descEl = document.getElementById('desc')
-      const formEl = document.getElementById('form')
-      const zipInput = document.getElementById('zip')
-
-      // Define event listeners
-      formEl.addEventListener('submit', (e) => {
-        e.preventDefault()
-        const zip = zipInput.value
-        const unit = 'imperial'
-
+      import Weather from './weather.js';
+    
+      const API_KEY = '1c4e590826ba3ca40333880acb9b0ddd';
+      const weather = new Weather(API_KEY);
+    
+      const formEl = document.querySelector('form');
+      const zipInput = document.querySelector('input[type="number"][placeholder="zip code"]');
+    
+      formEl.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const zip = zipInput.value;
+        const unit = 'imperial';
+    
         function updateWeatherData(weatherData) {
           const tempEl = document.getElementById('temp');
           const descEl = document.getElementById('desc');
           tempEl.innerHTML = weatherData.temperature;
           descEl.innerHTML = weatherData.description;
           console.log(weatherData)
-
-      }
-        getWeatherByZip(zip, unit)
-        .then(updateWeatherData)
-        .catch(console.error);
-
-
-      })           
+        }
+    
+        try {
+          const data = await weather.getWeatherByZip(zip, unit);
+          updateWeatherData(data);
+        } catch (error) {
+          console.error(error);
+        }
+      });
     </script>
   </body>
 </html>
